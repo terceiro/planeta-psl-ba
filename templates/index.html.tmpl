@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title><TMPL_VAR name></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="planet.css" type="text/css">
+</head>
+
+### Fancy Planet HTML template.
+### 
+### When combined with the stylesheet and images in the output/ directory
+### of the Planet source, this gives you a much prettier result than the
+### default examples template and demonstrates how to use the config file
+### to support things like faces
+### 
+### For documentation on the more boring template elements, see
+### examples/config.ini and examples/index.html.tmpl in the Planet source.
+
+
+<body>
+   <?php
+   define("_BBCLONE_DIR", "/usr/share/bbclone/");
+   define("COUNTER", _BBCLONE_DIR."mark_page.php");
+   if (is_readable(COUNTER)) include_once(COUNTER);
+   ?>
+
+<h1><TMPL_VAR name></h1>
+
+<TMPL_LOOP Items>
+<TMPL_IF new_date>
+<h2><TMPL_VAR new_date></h2>
+</TMPL_IF>
+
+<TMPL_IF new_channel>
+
+### Planet provides template variables for *all* configuration options for
+### the channel (and defaults), even if it doesn't know about them.  We
+### exploit this here to add hackergotchi faces to our channels.  Planet
+### doesn't know about the "face", "facewidth" and "faceheight" configuration
+### variables, but makes them available to us anyway.
+
+<h3><a href="<TMPL_VAR channel_link ESCAPE="HTML">" title="<TMPL_VAR channel_title ESCAPE="HTML">"><TMPL_VAR channel_name></a></h3>
+<TMPL_IF channel_face>
+<img class="face" src="heads/<TMPL_VAR channel_face ESCAPE="HTML">" width="<TMPL_VAR channel_facewidth ESCAPE="HTML">" height="<TMPL_VAR channel_faceheight ESCAPE="HTML">" alt="">
+</TMPL_IF>
+</TMPL_IF>
+
+
+<TMPL_IF title>
+<h4><a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR title></a></h4>
+</TMPL_IF>
+<div class="entry">
+<p>
+<TMPL_VAR content>
+</p>
+<p class="date">
+<a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_IF creator>by <TMPL_VAR creator> at </TMPL_IF><TMPL_VAR date></a>
+</p>
+</div>
+</TMPL_LOOP>
+
+
+<div class="sidebar">
+<center>
+<a href='http://ba.softwarelivre.org'><img border="no" src="images/logo.png" width="136" height="169" alt="Projeto Software Livre Bahia"></a>
+</center>
+
+<h2><a href="http://planeta.psl-ba.softwarelivre.org/heads.html">Inscritos:</a></h2>
+<ul>
+<TMPL_LOOP Channels>
+<li><a href="<TMPL_VAR link ESCAPE="HTML">" title="<TMPL_VAR title ESCAPE="HTML">"><TMPL_VAR name></a> <a href="<TMPL_VAR uri ESCAPE="HTML">">(feed)</a></li>
+</TMPL_LOOP>
+</ul>
+
+<div>
+<a href="rss10.xml"><img src="images/xml.png" alt="RSS 1.0" border="0"/></a> (RSS 1.0)
+<br/>
+<a href="rss20.xml"><img src="images/xml.png" alt="RSS 1.0" border="0"/></a> (RSS 2.0)
+</div>
+
+<p>
+<h2>Last Updated:</h2><br>
+<TMPL_VAR date><br>
+<em>All times are UTC.</em><br>
+<br>
+Powered by:
+<a href="http://www.planetplanet.org/"><img src="images/planet.png" width="80" height="15" alt="Planet" border="0"></a>
+</p>
+
+<p>
+<h2>Planetarium:</h2>
+<ul>
+<li><a href="http://www.planetapache.org/">Planet Apache</a></li>
+<li><a href="http://classpath.wildebeest.org/planet/">Planet Classpath</a></li>
+<li><a href="http://planet.debian.net/">Planet Debian</a></li>
+<li><a href="http://planet.debian.org.hk/">Planet Debian HK</a></li>
+<li><a href="http://planet.freedesktop.org/">Planet freedesktop.org</a></li>
+<li><a href="http://planet.humbug.org.au/">Planet Humbug</a></li>
+<li><a href="http://planet.gnome.org/">Planet GNOME</a></li>
+<li><a href="http://gnome.or.kr/pgk/">Planet GNOME Korea</a></li>
+<li><a href="http://planetjava.org/">Planet Java.org</a></li>
+<li><a href="http://myoss.bytebot.net/">Planet MYOSS</a></li>
+<li><a href="http://planet.perl.org/">Planet Perl</a></li>
+<li><a href="http://planet.slug.org.au/">Planet SLUG</a></li>
+<li><a href="http://www.planetsuse.org/">Planet SuSE</a></li>
+<li><a href="http://planet.twistedmatrix.com/">Planet Twisted</a></li>
+<li><a href="http://planet.arslinux.com/">Ars Linux</a></li>
+<li><a href="http://fedora.linux.duke.edu/fedorapeople/">Fedora People</a></li>
+<li><a href="http://fossplanet.osdir.com/">FOSS Planet</a></li>
+<li><a href="http://live.linuxchix.org/">LinuxChix Live</a></li>
+<li><a href="http://go-oo.org/planet/">Planet OpenOffice.org</a></li>
+<li><a href="http://planet.mozilla.org/">Planet Mozilla</a></li>
+<li><a href="http://planet.inkscape.org/">Planet Inkscape</a></li>
+<li><a href="http://planeta.debianbrasil.org/">Planeta Debian Brasil</a></li>
+</ul>
+</p>
+</div>
+
+<script type="text/javascript" src="http://twiki.im.ufba.br/bin/view/PSL/ScriptTroqueOSeuNavegador"></script>
+</body>
+
+</html>
