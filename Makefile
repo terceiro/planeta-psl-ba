@@ -1,12 +1,16 @@
 GENERATED=cache-pslba/ $(wildcard output/*.xml output/*.html templates/*tmplc)
-RSYNC_EXCLUDE=$(shell echo $(GENERATED) | sed -e 's/^\|\s\+/ --exclude /g')
+NOT_SYNC=planet/ test/
+RSYNC_EXCLUDE=$(shell echo $(GENERATED) $(NOT_SYNC) | sed -e 's/^\|\s\+/ --exclude /g')
 
 all:
 	@echo $(RSYNC_EXCLUDE)
 
+pseudosync:
+	RSYNC_OPTS=--dry-run make sync 
+
 # provisorio, depois colocamos para o local definitivo
 sync:
-	rsync -avp $(RSYNC_EXCLUDE) . terceiro@people.softwarelivre.org:public_html/planeta-psl-ba
+	rsync -avp $(RSYNC_OPTS) $(RSYNC_EXCLUDE) . terceiro@people.softwarelivre.org:public_html/planeta-psl-ba
 	
 
 clean:
