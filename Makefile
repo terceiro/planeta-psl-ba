@@ -1,4 +1,4 @@
-GENERATED=cache-pslba/ $(wildcard output/*.xml output/*.html templates/*tmplc)
+GENERATED=cache-pslba/ $(wildcard output/*.xml output/*.html templates/*tmplc) .svn
 NOT_SYNC=planet/ test/
 RSYNC_EXCLUDE=$(shell echo $(GENERATED) $(NOT_SYNC) | sed -e 's/^\|\s\+/ --exclude /g')
 
