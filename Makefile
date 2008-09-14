@@ -1,4 +1,4 @@
-GENERATED=cache-pslba/ $(wildcard output/*.xml output/*.html templates/*tmplc) .svn
+GENERATED=cache-pslba/ $(wildcard output/*.xml output/*.html templates/*tmplc) .svn .git
 NOT_SYNC=planet/ test/
 RSYNC_EXCLUDE=$(shell echo $(GENERATED) $(NOT_SYNC) | perl -e 'print "--exclude $$_ " foreach(split(/\s+/, <STDIN>));')
 
